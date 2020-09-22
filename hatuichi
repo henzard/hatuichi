@@ -21,7 +21,7 @@ get_rooms(){
     echo 
     echo 
     hamachi list
-    status "[1]login [2]logout [r]efresh [q]uit"$'\e[H'
+    status "[1]login [2]logout [3]refresh [4]join [5]leave [6]go-online [7]go-offline [0]quit"$'\e[H'
 }
 
 prompt(){
@@ -29,10 +29,14 @@ prompt(){
     status $'\e[B\e[?25h'
 
     case "$1" in
-        1) hamachi login ;;
-        2) hamachi logoff ;;
-        r) refresh ;;
-        q) exit 0 ;;
+        1|k) hamachi login ;;
+        2|j) hamachi logoff ;;
+        3|r) refresh ;;
+        4|p) read -rp "<network id> [<password>] #>"; hamachi join ${REPLY} ;;
+        5|n) read -rp "<network id> #>"; hamachi leave ${REPLY} ;;
+        6|h) read -rp "<network id> #>"; hamachi go-online ${REPLY} ;;
+        7|l) read -rp "<network id> #>"; hamachi go-offline ${REPLY} ;;
+        q|0) exit 0 ;;
     esac
 
     [[ "$1" =~ (j|k) ]] || refresh && printf '\e[?25l\e[H'
