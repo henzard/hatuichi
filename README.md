@@ -66,6 +66,3 @@ q: quit
 
 - [fff](https://github.com/dylanaraps/fff)
 
-## Why?
-
-¯\\\_(ツ)_/¯
