@@ -48,10 +48,15 @@ sudo /etc/init.d/logmein-hamachi start
 ### keys
 
 ```sh
-1: login
-2: logout
-r: refresh
-q: quit
+1 or k: login
+2 or j: logout
+3 or r: refresh
+4 or p: join a network
+5 or n: leave a network
+6 or h: go online in a network
+7 or l: go offline in a network
+8 or c: create a network
+0 or q: quit
 ```
 
 ![hatuichi](previews/preview1.png)
