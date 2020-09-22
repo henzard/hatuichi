@@ -56,6 +56,14 @@ q: quit
 
 ![hatuichi](previews/preview1.png)
 
+## Thanks to
+[dylanaraps](https://github.com/dylanaraps)
+
+Inspired by
+
+- [torque](https://github.com/dylanaraps/torque)
+
+- [fff](https://github.com/dylanaraps/fff)
 
 ## Why?
 
