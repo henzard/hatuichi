@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+#
+# hatuichi - simple logmein-hamachi tui client
+
+refresh(){
+    printf '\e[?7l\e[?25l\e[2J\e[H' 
+    shopt -s checkwinsize; (:;:)
+    [[ -z "$LINES" ]] && read -r LINES COLUMNS < <(stty size) # 
+    ((j=(LINES-2)/3))
+}
+
+status(){
+    printf '\e[2m\e[%s;H%s\e[m' "$((LINES-1))" "$1" 
+}
+
+get_rooms(){
+    hamachi | grep status
+    hamachi | grep address
+    hamachi | grep nickname
+    echo 
+    echo 
+    echo 
+    hamachi list
+    status "[1]login [2]logout [r]efresh [q]uit"$'\e[H'
+}
+
+prompt(){
+    send() { hamachi "$@" >/dev/null; }
+    status $'\e[B\e[?25h'
+
+    case "$1" in
+        1) hamachi login ;;
+        2) hamachi logoff ;;
+        r) refresh ;;
+        q) exit 0 ;;
+    esac
+
+    [[ "$1" =~ (j|k) ]] || refresh && printf '\e[?25l\e[H'
+}
+main(){
+    refresh
+    trap $'printf \e[?25h\e[?7h\e[9998; clear' EXIT
+    trap 'refresh; k=0; ' SIGWINCH
+
+    for ((;;)); { get_rooms; read -rsN1 && prompt "$REPLY"; }
+
+}
+
+main
