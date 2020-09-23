@@ -29,19 +29,18 @@ prompt(){
     status $'\e[B\e[?25h'
 
     case "$1" in
-        1|k) hamachi login ;;
-        2|j) hamachi logoff ;;
+        1|k) send login ;;
+        2|j) send logoff ;;
         3|r) refresh ;;
-        4|p) read -rp "<network id> [<password>] #>"; hamachi join ${REPLY} ;;
-        5|n) read -rp "<network id> #>"; hamachi leave ${REPLY} ;;
-        6|h) read -rp "<network id> #>"; hamachi go-online ${REPLY} ;;
+        4|p) read -rp "<network id> [<password>] #>"; send join ${REPLY} ;;
+        5|n) read -rp "<network id> #>"; send leave ${REPLY} ;;
+        6|h) read -rp "<network id> #>"; send go-online ${REPLY} ;;
         7|l) read -rp "<network id> #>"; hamachi go-offline ${REPLY} ;;
-        8|c) read -rp "<network id> [<password>] #>"; hamachi create ${REPLY} ;;
+        8|c) read -rp "<network id> [<password>] #>"; send create ${REPLY} ;;
         q|0) exit 0 ;;
         * ) refresh ;;
     esac
 
-    [[ "$1" =~ (j|k) ]] || refresh && printf '\e[?25l\e[H'
 }
 main(){
     refresh
